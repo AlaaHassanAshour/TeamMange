@@ -1,0 +1,76 @@
+﻿@model CompanyInformationVM
+
+    <div id="mytask-layout" class="theme-indigo">
+
+        <partial name="MenuTab" model="@Model.CompanyInfromation"/>
+        <div class="main px-lg-4 px-md-4">
+            <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title  fw-bold" id="createprojectlLabel"> بيانات عاامة</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="deadline-form">
+                            <form asp-controller="Setting" asp-action="AddGeneralSetting" enctype="multipart/form-data" method="post">
+                                <div class="row g-3 mb-3">
+                                    <div class="col">
+                                        <label class="form-label">اسم الشركة</label>
+                                        <input asp-for="CompanyInfromation.ID" hidden type="text" class="form-control">
+                                        <input asp-for="CompanyInfromation.image" hidden type="text" class="form-control">
+                                        <input asp-for="CompanyInfromation.CompanyName" type="text" class="form-control">
+                                    </div>
+                                    
+                                </div>
+                                <div class="row g-3 mb-3">
+                                    <div class="col">
+                                        <label class="form-label">بداية أيام الدوام</label>
+                                        <select asp-for="CompanyInfromation.WorkFirstDay"  class="form-select" aria-label="Default select Project Category">
+                                            <option value="6">السبت</option>
+                                            <option value="0">الأحد</option>
+                                            <option value="1">الاثنين</option>
+                                            <option value="2">الثلاثاء</option>
+                                            <option value="3">الأربعاء</option>
+                                            <option value="4">الخميس</option>
+                                            <option value="5">الجمعة</option>
+                                          
+
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label">نهاية أيام الدوام</label>
+                                        <select asp-for="CompanyInfromation.WorkLastDay" class="form-select" aria-label="Default select Project Category">
+                                            <option value="6">السبت</option>
+                                            <option value="0">الأحد</option>
+                                            <option value="1">الاثنين</option>
+                                            <option value="2">الثلاثاء</option>
+                                            <option value="3">الأربعاء</option>
+                                            <option value="4">الخميس</option>
+                                            <option value="5">الجمعة</option>
+
+
+                                        </select>                                    </div>
+                                   
+                                </div>
+                                <div class="row g-3 mb-3">
+                                    <div class="col">
+                                        <label class="form-label">الشعار</label>
+                                        <input asp-for="CompanyInfromation.imagePath"  class="form-control" type="file">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">خروج</button>
+                                    <button type="submit" class="btn btn-primary">اضافة </button>
+                                </div>
+
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+</div>
+</div>

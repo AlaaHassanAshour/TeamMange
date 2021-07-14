@@ -1,0 +1,117 @@
+﻿@model LeaveReaquestVM
+@inject UserManager<IdentityUser> um
+@inject SignInManager<IdentityUser> sm
+
+<div id="mytask-layout" class="theme-indigo">
+    <partial name="MenuTab" model="@Model.CompanyInfromation" />
+
+    <div class="main px-lg-4 px-md-4">
+
+        <!-- Body: Body -->
+        <div class="body d-flex py-lg-3 py-md-2">
+            <div class="container-xxl">
+                <div class="row align-items-center">
+                    <div class="border-0 mb-4">
+                        <div class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
+                            <h3 class="fw-bold mb-0">الأذونـــات</h3>
+                            <div class="col-auto d-flex w-sm-100">
+                                <button type="button" class="btn btn-dark btn-set-task w-sm-100" data-bs-toggle="modal" data-bs-target="#leaveadd"><i class="icofont-plus-circle me-2 fs-6"></i>إضافة اذن</button>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- Row end  -->
+                <div class="row clearfix g-3">
+                    <div class="col-sm-12">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <table id="myProjectTable" class="table text-center table-hover align-middle mb-0" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>رقم</th>
+                                            <th>تاريخ اليوم</th>
+                                            <th>من</th>
+                                            <th>إلى</th>
+                                            <th>عدد الساعات</th>
+                                            <th>سبب الخروج</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.ExitePrmissions)
+                                        {
+                                        <tr>
+                                            <td>
+                                                <a class="fw-bold text-secondary">@item.ExitID</a>
+                                            </td>
+                                            <td>
+                                                @item.DayExit.ToShortDateString()
+                                            </td>
+                                            <td>
+                                                @item.TimeOut.ToShortTimeString().Trim(new Char[] { 'A', 'P', 'M' })
+                                            </td>
+                                            <td>
+                                                @item.TimeBack.ToShortTimeString().Trim(new Char[] { 'A', 'P', 'M' })
+                                            </td>
+                                            <td>
+                                                @item.TotalHrs.TotalHours.ToString()
+                                            </td>
+                                            <td>
+                                                @item.ExitReason
+                                            </td>
+
+                                        </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Row End -->
+            </div>
+        </div>
+
+        <!-- Leave Add-->
+        <div class="modal fade" id="leaveadd" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title  fw-bold" id="leaveaddLabel"> إضافة إذن</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="deadline-form">
+                            <form asp-controller="EmployeePages" asp-action="LeaveReaquest" method="post">
+                                <div class="row g-3 mb-3">
+                                    <div class="col-sm-6">
+                                        <label class="form-label">وقت الخروج</label>
+                                        <input asp-for="ExitePrmission.EmployeeID" value="@um.GetUserId(User)" hidden class="form-control">
+                                        <input asp-for="ExitePrmission.TimeOut" type="time" value="@ViewBag.Date" class="form-control">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="form-label">وقت الرجوع</label>
+                                        <input asp-for="ExitePrmission.TimeBack" type="time" value="@ViewBag.Date" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">سبب الخروج</label>
+                                    <textarea asp-for="ExitePrmission.ExitReason" class="form-control" rows="3"></textarea>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">خروج</button>
+                                    <button type="submit" class="btn btn-primary">ارسال الإذن</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>

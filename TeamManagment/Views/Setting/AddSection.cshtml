@@ -1,0 +1,116 @@
+﻿@model SectionVM
+
+    <div id="mytask-layout" class="theme-indigo">
+
+        <partial name="MenuTab" model="@Model.CompanyInfromation" />
+        <div class="main px-lg-4 px-md-4">
+
+            <!-- Body: Header -->
+            
+
+            <!-- Body: Body -->
+            <div class="body d-flex py-lg-5 py-md-5">
+                <div class="container-xxl">
+                    <div class="row clearfix">
+                        <div class="col-md-12">
+                            <div class="card border-0 mb-4 no-bg">
+                                <div class="card-header py-3 px-0 d-sm-flex align-items-center  justify-content-between border-bottom">
+                                    <h3 class=" fw-bold flex-fill mb-0 mt-sm-0">الأقســام</h3>
+                                    <button type="button" class="btn btn-dark me-1 mt-1 w-sm-100" data-bs-toggle="modal" data-bs-target="#createemp"><i class="icofont-plus-circle me-2 fs-6"></i>اضافة قسم</button>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- Row End -->
+                    <div class="row clearfix g-3">
+                        <div class="col-sm-12">
+                            <div class="card mb-3">
+                                <div class="card-body ">
+                                    <table id="myProjectTable" class="table text-center table-hover align-middle mb-0" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th class="fw-bold ms-1">رقم القسم</th>
+                                                <th class="fw-bold ms-1">اسم القسم</th>
+                                                <th class="fw-bold ms-1">أحداث</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.SectionWorks)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <a class="fw-bold text-secondary">@item.SectionID</a>
+                                                    </td>
+                                                    <td>
+                                                        <span class="fw-bold ms-1">@item.SectionName</span>
+                                                    </td>
+                                                    
+                                                    <td>
+                                                        <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                                            <a onclick="showInPop('@Url.Action("EditSection","Setting",new {id=item.SectionID },Context.Request.Scheme)','تعديل القسم')" class="btn btn-outline-secondary" ><i class="icofont-edit text-success"></i></a>
+                                                            <a asp-controller="Setting" asp-action="DeletSection" asp-route-id="@item.SectionID" class="btn btn-outline-secondary "><i class="icofont-ui-delete text-danger"></i></a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Create Employee-->
+            <div class="modal fade" id="createemp" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title  fw-bold" id="createprojectlLabel"> اضافة قسم</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="deadline-form">
+                                <form asp-controller="Setting" asp-action="AddSection" enctype="multipart/form-data" method="post">
+                                    <div class="row g-3 mb-3">
+                                        <div class="col">
+                                            <label class="form-label">اسم القسم</label>
+                                            <input asp-for="SectionWork.SectionName" type="text" class="form-control">
+                                        </div>
+                                        
+                                    </div>
+                                
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">خروج</button>
+                                        <button type="submit" class="btn btn-primary">اضافة القسم</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                            
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    showInPop = (url, title)=>{
+        $.ajax({
+            type: "Get",
+            url: url,
+            success: function (res) {
+                $("#form-modal .modal-body").html(res);
+                $("#form-modal .modal-title").html(title);
+                $("#form-modal").modal('show');
+
+            }
+
+        })
+    }
+
+    </script>

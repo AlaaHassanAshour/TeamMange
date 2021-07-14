@@ -1,0 +1,77 @@
+﻿@model ChangePassVM
+@{
+    Layout = null;
+}
+    <html dir="rtl">
+    <body>
+        <div class="wrapper ">
+            <div class="sidebar main-bg " style="background-color:#000;margin-top: 3rem;">
+                <partial name="AdminTab" />
+            </div>
+            
+
+            <div class="main-panel text-center">
+
+                <div class="content mt-md-5 pt-5">
+
+                    <div class="container px-xl-5 text-center">
+                        <section class="py-2">
+                        </section>
+                        <section>
+                            <div class="row mb-4 text-right ">
+                                <div class="col mb-5">
+                                    <div class="card">
+                                        <div class="card-header text-white" style=" background-color:#000 !important;">
+                                            <h3 class="h6  mb-0">تغيير كلمة المرور</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <p>لتغيير كلمة المرور عليك تعبئة البيانات التالية</p>
+                                            <form asp-action="ChangePass" asp-controller="Account"
+                                                  asp-route-ReturnUrl="@ViewData["ReturnUrl"]" enctype="multipart/form-data" method="post">
+                                                <div class="form-group">
+                                                    <label class="form-control-label ">كلمة المرور القديمة</label>
+                                                    <input asp-for="Password" type="password"   class="form-control" />
+                                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="form-control-label ">كلمة المرور الجديدة</label>
+                                                    <input asp-for="NewPassword" type="password" class="form-control" />
+                                                    <span asp-validation-for="NewPassword" class="text-danger"></span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="form-control-label ">تأكيد كلمة المرور</label>
+                                                    <input asp-for="ConfirmPassword" type="password" placeholder="تأكيد  " class="form-control" />
+                                                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                                </div>
+                                                <div class="form-group text-center">
+                                                    <button type="submit" class="btn text-white" data-toggle="modal" data-target="#loginModal" style=" background-color:#000 !important;">حفظ التغييرات</button>
+                                                    <button type="submit" class="btn" style=" background-color: white !important;color: #7d2880 !important; border-color:#7d2880 !important;"> إالغاء</button>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Horizontal Form-->
+
+                            </div>
+
+                        </section>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    </body>
+
+    </html>
+
+
+

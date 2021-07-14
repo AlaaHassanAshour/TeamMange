@@ -1,0 +1,130 @@
+﻿@model EmpHolidayVM
+@inject UserManager<IdentityUser> um
+@inject SignInManager<IdentityUser> sm
+
+<div id="mytask-layout" class="theme-indigo">
+    <partial name="MenuTab" model="@Model.CompanyInfromation" />
+
+    <div class="main px-lg-4 px-md-4">
+
+        <!-- Body: Body -->
+        <div class="body d-flex py-lg-3 py-md-2">
+            <div class="container-xxl">
+                <div class="row align-items-center">
+                    <div class="border-0 mb-4">
+                        <div class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
+                            <h3 class="fw-bold mb-0">الاجــازات</h3>
+                            <div class="col-auto d-flex w-sm-100">
+                                <button type="button" class="btn btn-dark btn-set-task w-sm-100" data-bs-toggle="modal" data-bs-target="#leaveadd"><i class="icofont-plus-circle me-2 fs-6"></i>إضافة إجازة</button>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- Row end  -->
+                <div class="row clearfix g-3">
+                    <div class="col-sm-12">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <table id="myProjectTable" class="table text-center table-hover align-middle mb-0" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>رقم</th>
+                                            <th>بداية الإجازة</th>
+                                            <th>نهاية الإجازة</th>
+                                            <th>عدد الأيام</th>
+                                            <th>سبب الإجازة</th>
+                                            <th>الحالة</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.EmployeeHolidays)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <a class="fw-bold text-secondary">@item.HolidayID</a>
+                                                </td>
+                                                <td>
+                                                    @item.FirstHolidayDay.ToShortDateString()
+                                                </td>
+                                                <td>
+                                                    @item.LastHolidayDay.ToShortDateString()
+                                                </td>
+                                                <td>
+                                                    @item.DayDifference
+                                                </td>
+                                                <td>
+                                                    @item.HolidayReason
+                                                </td>
+                                                <td>
+                                                    @if (item.HolidayState == HolidayState.مقبول)
+                                                    {
+                                                        <span class="badge p-2 bg-success">@item.HolidayState</span>
+                                                    }
+                                                    else if (item.HolidayState == HolidayState.قيد_المراجعة)
+                                                    {
+                                                        <span class="badge bg-warning">@item.HolidayState</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="badge bg-danger">@item.HolidayState</span>
+                                                    }
+
+                                                </td>
+
+                                            </tr>
+                                        }
+
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Row End -->
+            </div>
+        </div>
+
+
+        <!-- Leave Add-->
+        <div class="modal fade" id="leaveadd" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title  fw-bold" id="leaveaddLabel"> إضافةإجازة</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="deadline-form">
+                            <form asp-controller="EmployeePages" asp-action="EmpHoliday" method="post">
+                                <div class="row g-3 mb-3">
+                                    <div class="col-sm-6">
+                                        <label class="form-label">تاريخ بدء الإجازة</label>
+                                        <input asp-for="EmployeeHoliday.EmployeeID" value="@um.GetUserId(User)" hidden class="form-control">
+                                        <input asp-for="EmployeeHoliday.FirstHolidayDay" type="date" class="form-control">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="form-label">تاريخ انتهاء الإجازة</label>
+                                        <input asp-for="EmployeeHoliday.LastHolidayDay" type="date" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">سبب الاجازة</label>
+                                    <textarea asp-for="EmployeeHoliday.HolidayReason" class="form-control" rows="3"></textarea>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">خروج</button>
+                                    <button type="submit" class="btn btn-primary">ارسال </button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

@@ -1,0 +1,88 @@
+﻿@model Employee
+
+    <div class="deadline-form">
+        <form asp-controller="Employee" asp-action="EditEmployee" enctype="multipart/form-data" method="post">
+            <div class="row g-3 mb-3">
+                <div class="col">
+                    <label class="form-label">اسم الموظف الأول</label>
+                    <input asp-for="FirstName" type="text" class="form-control">
+                    <input asp-for="EmployeeID" hidden type="text" class="form-control">
+                </div>
+                <div class="col">
+                    <label class="form-label">اسم الموظف الثاني</label>
+                    <input asp-for="SecoundName" type="text" class="form-control">
+                </div>
+            </div>
+            <div class="row g-3 mb-3">
+                <div class="col">
+                    <label class="form-label">اسم الموظف الأخير</label>
+                    <input asp-for="LastName" type="text" class="form-control">
+                </div>
+                <div class="col">
+                    <label class="form-label">عدد ساعات عمل الموظف</label>
+                    <select asp-for="workHours" class="form-select" aria-label="Default select Project Category">
+                        <option value="2" selected>2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+
+                    </select>
+                </div>
+            </div>
+            <div class="row g-3 mb-3">
+                <div class="col">
+                    <label class="form-label">راتب الموظف</label>
+                    <input asp-for="Salary" type="text" class="form-control">
+                </div>
+                <div class="col">
+                    <label class="form-label">عملة الراتب</label>
+                    <select asp-for="Currency" asp-items="Html.GetEnumSelectList<Currency>()" class="form-select"></select>
+                </div>
+            </div>
+            <div class="row g-3 mb-3">
+                <div class="col">
+                    <label class="form-label">ايميل الموظف</label>
+                    <input asp-for="EmailAddress" type="email" class="form-control">
+                </div>
+                <div class="col">
+                    <label class="form-label">رقم الجوال</label>
+                    <input asp-for="PhoneNumber" type="text" class="form-control">
+                </div>
+            </div>
+            <div class="row g-3 mb-3">
+                <div class="col">
+                    <label class="form-label">اسم المستخدم</label>
+                    <input asp-for="UserName" type="text" class="form-control">
+                </div>
+                <div class="col">
+                    <label class="form-label">كلمة السر</label>
+                    <input asp-for="Password" type="Password" class="form-control">
+                </div>
+            </div>
+            <div class="row g-3 mb-3">
+                <div class="col">
+                    <label class="form-label">قسم العمل</label>
+                    <select asp-for="SecID" class="form-select" asp-items="@ViewBag.Section">
+                    </select>
+                </div>
+                <div class="col">
+                    <label class="form-label">الوظيفة</label>
+                    <select asp-for="JID" class="form-select" asp-items="@ViewBag.Jobs">
+                    </select>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">خروج</button>
+                <button type="submit" class="btn btn-primary">تعديل الموظف</button>
+            </div>
+
+        </form>
+    </div>

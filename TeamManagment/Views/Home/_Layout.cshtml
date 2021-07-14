@@ -1,0 +1,40 @@
+﻿<!doctype html>
+<html class="no-js" lang="en" dir="rtl">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title> Employee Dashboard </title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
+    <!-- project css file  -->
+    <link href="~/lib/bootstrap-rtl/css/bootstrap-rtl.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap-rtl/css/bootstrap-rtl.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/assets/css/my-task.style.min.css">
+
+    <style>
+        body.font-lato, html.font-lato {
+            display: none;
+        }
+    </style>
+
+</head>
+<body>
+    @RenderBody()
+
+    
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+    <!-- Jquery Core Js -->
+    <script src="~/assets/bundles/libscripts.bundle.js"></script>
+
+    <!-- Plugin Js-->
+    <script src="~/assets/bundles/apexcharts.bundle.js"></script>
+
+    <!-- Jquery Page Js -->
+    <script src="~/assets/js/template.js"></script>
+    <script src="~/assets/js/page/hr.js"></script>
+</body>
+</html>

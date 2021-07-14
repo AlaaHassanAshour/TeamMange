@@ -1,0 +1,100 @@
+﻿@model EmployeeVM
+@inject UserManager<IdentityUser> um
+@inject RoleManager<IdentityRole> rl
+@inject SignInManager<IdentityUser> sm
+
+<div id="mytask-layout" class="theme-indigo">
+    <partial name="MenuTab" model="@Model.CompanyInfromation" />
+    <div class="main px-lg-4 px-md-4 mt-5">
+        <div class="row clearfix g-3">
+            <div class="col-sm-12">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table text-center table-hover align-middle mb-0" style="width:100%">
+                                @{ 
+                                    DateTime date = DateTime.Now;
+                                    var firstDayOfMonth = new DateTime(date.Year, date.Month, 1);
+                                    var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+                                    var ite = 0;
+                                }
+                                <thead>
+                                    <tr>
+                                        <th>الموظف</th>
+                                        @for (var i = firstDayOfMonth.Day; i < lastDayOfMonth.Day; i++)
+                                        {
+                                            <th>@i</th>
+                                        }
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Employees)
+                                    {
+                                        ite = 0;
+                                    <tr>
+                                        <td>
+                                            <span class="fw-bold small">@item.FullName</span>
+                                        </td>
+                                        @for (var i = firstDayOfMonth.Day; i < lastDayOfMonth.Day;)
+                                        {
+                                            if (ite >= item.WorkTimes.Where(c => c.TheDate.Month == DateTime.Today.Month).Count())
+                                            {
+                                                <td>
+                                                    <i class="icofont-close-circled text-danger"></i>
+                                                </td>
+                                                i++;
+                                            }
+                                            else
+                                            {
+                                                @for (; ite < item.WorkTimes.Where(c => c.TheDate.Month == DateTime.Today.Month).Count();)
+                                                {
+                                                    if (item.WorkTimes[ite].TheDate.Day == i)
+                                                    {
+                                                        if (item.WorkTimes[ite].States == 1)
+                                                        {
+                                                            <td>
+                                                                <i class="icofont-check-circled text-success"></i>
+                                                            </td>
+                                                        }
+                                                        else
+                                                        {
+                                                            string sel = "";
+                                                            if (item.WorkTimes[ite].HolidayOrNot) { sel = "bg-warning"; }
+                                                            <td class="@sel">
+                                                                <i class="icofont-close-circled text-danger"></i>
+                                                            </td>
+                                                        }
+                                                        ite++;
+                                                        i++;
+
+                                                    }
+                                                    else
+                                                    {
+                                                        string sel = "";
+                                                        if (item.WorkTimes[ite].HolidayOrNot) { sel = "bg-warning"; }
+                                                        <td class="@sel">
+                                                            <i class="icofont-close-circled text-danger"></i>
+                                                        </td>
+                                                        i++;
+                                                        break;
+                                                    }
+                                                }
+
+                                            }
+
+                                        }
+                                    </tr>
+                                    }
+
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

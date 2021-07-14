@@ -1,0 +1,20 @@
+﻿@model SectionWork
+
+    <div class="deadline-form">
+        <form asp-controller="Setting" asp-action="EditSection" enctype="multipart/form-data" method="post">
+            <div class="row g-3 mb-3">
+                <div class="col">
+                    <label class="form-label">اسم القسم</label>
+                    <input asp-for="SectionName" type="text" class="form-control">
+                    <input asp-for="SectionID" hidden type="text" class="form-control">
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">خروج</button>
+                <button type="submit" class="btn btn-primary">تعديل القسم</button>
+            </div>
+
+        </form>
+    </div>

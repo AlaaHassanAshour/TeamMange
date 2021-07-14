@@ -1,0 +1,26 @@
+﻿@model Jobs
+
+
+    <div class="deadline-form">
+        <form asp-controller="Setting" asp-action="EditJob" enctype="multipart/form-data" method="post">
+            <div class="row g-3 mb-3">
+                <div class="col">
+                    <label class="form-label">اسم الوظيفة</label>
+                    <input asp-for="JobName" type="text" class="form-control">
+                    <input asp-for="JobID" hidden type="text" class="form-control">
+                </div>
+            </div>
+            <div class="row g-3 mb-3">
+                <div class="col">
+                    <label class="form-label">قسم العمل</label>
+                    <select asp-for="SecID" class="form-select" asp-items="@ViewBag.Section">
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">خروج</button>
+                <button type="submit" class="btn btn-primary">تعديل الوظيفة</button>
+            </div>
+
+        </form>
+    </div>

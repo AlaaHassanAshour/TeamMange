@@ -1,0 +1,203 @@
+﻿@model EmployeeVM
+
+    <div id="mytask-layout" class="theme-indigo">
+
+        <partial name="MenuTab" model="@Model.CompanyInfromation" />
+        <div class="main px-lg-4 px-md-4">
+
+            <!-- Body: Header -->
+            <!-- Body: Body -->
+            <div class="body d-flex py-lg-5 py-md-5">
+                <div class="container-xxl">
+                    <div class="row clearfix">
+                        <div class="col-md-12">
+                            <div class="card border-0 mb-4 no-bg">
+                                <div class="card-header py-3 px-0 d-sm-flex align-items-center  justify-content-between border-bottom">
+                                    <h3 class=" fw-bold flex-fill mb-0 mt-sm-0">الموظفيـن</h3>
+                                    <button type="button" class="btn btn-dark me-1 mt-1 w-sm-100" data-bs-toggle="modal" data-bs-target="#createemp"><i class="icofont-plus-circle me-2 fs-6"></i>اضافة موظف</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- Row End -->
+                    <div class="row clearfix g-3">
+                        <div class="col-sm-12">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <table id="myProjectTable" class="table text-center table-hover align-middle mb-0" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th class="fw-bold ms-1">رقم الموظف</th>
+                                                <th class="fw-bold ms-1">اسم الموظف</th>
+                                                <th class="fw-bold ms-1">الراتب</th>
+                                                <th class="fw-bold ms-1">رقم الجوال</th>
+                                                <th class="fw-bold ms-1">ساعات العمل</th>
+                                                <th class="fw-bold ms-1">أحداث</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.Employees)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <a asp-controller="Employee" asp-action="Employee" asp-route-EID="@item.EmployeeID" class="fw-bold text-secondary">@item.EmployeeID.Substring(0, 6) ....</a>
+                                                    </td>
+                                                    <td>
+                                                        <a asp-controller="Employee" asp-action="Employee" asp-route-EID="@item.EmployeeID"><span class="fw-bold ms-1">@item.FullName</span></a>
+                                                    </td>
+                                                    <td>
+                                                        @item.Salary
+                                                    </td>
+                                                    <td>
+                                                        @item.PhoneNumber
+                                                    </td>
+                                                    <td>
+                                                        @item.workHours
+                                                    </td>
+
+                                                    <td>
+                                                        <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                                            <a onclick="showInPop('@Url.Action("EditEmployee","Employee",new {EID=item.EmployeeID },Context.Request.Scheme)','تعديل الموظف')" class="btn btn-outline-secondary"><i class="icofont-edit text-success"></i></a>
+                                                            <a asp-controller="Employee" asp-action="DeletEmployee" asp-route-EID="@item.EmployeeID" class="btn btn-outline-secondary "><i class="icofont-ui-delete text-danger"></i></a>
+                                                        </div>
+                                                        
+
+                                                    </td>
+                                                </tr>
+
+                                            }
+
+
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Create Employee-->
+            <div class="modal fade" id="createemp" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title  fw-bold" id="createprojectlLabel"> اضافة موظف</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="deadline-form">
+                                <form asp-controller="Employee" asp-action="AddEmployee" enctype="multipart/form-data" method="post">
+                                    <div class="row g-3 mb-3">
+                                        <div class="col">
+                                            <label class="form-label">اسم الموظف الأول</label>
+                                            <input asp-for="Employee.FirstName" type="text" class="form-control">
+                                        </div>
+                                        <div class="col">
+                                            <label class="form-label">اسم الموظف الثاني</label>
+                                            <input asp-for="Employee.SecoundName" type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row g-3 mb-3">
+                                        <div class="col">
+                                            <label class="form-label">اسم الموظف الأخير</label>
+                                            <input asp-for="Employee.LastName" type="text" class="form-control">
+                                        </div>
+                                        <div class="col">
+                                            <label class="form-label">عدد ساعات عمل الموظف</label>
+                                            <select asp-for="Employee.workHours" class="form-select" aria-label="Default select Project Category">
+                                                <option value="2" selected>2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row g-3 mb-3">
+                                        <div class="col">
+                                            <label class="form-label">راتب الموظف</label>
+                                            <input asp-for="Employee.Salary" type="text" class="form-control">
+                                        </div>
+                                        <div class="col">
+                                            <label class="form-label">عملة الراتب</label>
+                                            <select asp-for="Employee.Currency" asp-items="Html.GetEnumSelectList<Currency>()" class="form-select"></select>
+                                        </div>
+                                    </div>
+                                    <div class="row g-3 mb-3">
+                                        <div class="col">
+                                            <label class="form-label">ايميل الموظف</label>
+                                            <input asp-for="Employee.EmailAddress" type="email" class="form-control">
+                                        </div>
+                                        <div class="col">
+                                            <label class="form-label">رقم الجوال</label>
+                                            <input asp-for="Employee.PhoneNumber" type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row g-3 mb-3">
+                                        <div class="col">
+                                            <label class="form-label">اسم المستخدم</label>
+                                            <input asp-for="Employee.UserName" type="text" class="form-control">
+                                        </div>
+                                        <div class="col">
+                                            <label class="form-label">كلمة السر</label>
+                                            <input asp-for="Employee.Password" type="Password" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row g-3 mb-3">
+                                        <div class="col">
+                                            <label class="form-label">قسم العمل</label>
+                                            <select asp-for="Employee.SecID" class="form-select" asp-items="@ViewBag.Section">
+                                            </select>
+                                        </div>
+                                        <div class="col">
+                                            <label class="form-label">الوظيفة</label>
+                                            <select asp-for="Employee.JID" class="form-select" asp-items="@ViewBag.Jobs">
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">خروج</button>
+                                        <button type="submit" class="btn btn-primary">اضافة الموظف</button>
+                                    </div>
+
+                                </form>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+<script>
+    showInPop = (url, title)=>{
+        $.ajax({
+            type: "Get",
+            url: url,
+            success: function (res) {
+                console.log(res);
+                $("#form-modal .modal-body").html(res);
+                $("#form-modal .modal-title").html(title);
+                $("#form-modal").modal('show');
+
+            }
+            
+        })
+    }
+
+</script>
+   

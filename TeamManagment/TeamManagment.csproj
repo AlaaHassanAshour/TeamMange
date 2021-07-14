@@ -1,0 +1,163 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\assets\bundles\apexcharts.bundle.js" />
+    <Content Remove="wwwroot\assets\bundles\dataTables.bundle.js" />
+    <Content Remove="wwwroot\assets\bundles\libscripts.bundle.js" />
+    <Content Remove="wwwroot\assets\bundles\nestable.bundle.js" />
+    <Content Remove="wwwroot\assets\css\my-task.style.min.css" />
+    <Content Remove="wwwroot\assets\fonts\icofont\fonts\icofont-.eot" />
+    <Content Remove="wwwroot\assets\fonts\icofont\fonts\icofont.eot" />
+    <Content Remove="wwwroot\assets\fonts\icofont\fonts\icofont.svg" />
+    <Content Remove="wwwroot\assets\fonts\icofont\fonts\icofont.ttf" />
+    <Content Remove="wwwroot\assets\fonts\icofont\fonts\icofont.woff" />
+    <Content Remove="wwwroot\assets\images\change-log.svg" />
+    <Content Remove="wwwroot\assets\images\document\menu-close.png" />
+    <Content Remove="wwwroot\assets\images\document\menu-open.png" />
+    <Content Remove="wwwroot\assets\images\forgot-password.svg" />
+    <Content Remove="wwwroot\assets\images\gallery\1.jpg" />
+    <Content Remove="wwwroot\assets\images\gallery\10.jpg" />
+    <Content Remove="wwwroot\assets\images\gallery\2.jpg" />
+    <Content Remove="wwwroot\assets\images\gallery\3.jpg" />
+    <Content Remove="wwwroot\assets\images\gallery\4.jpg" />
+    <Content Remove="wwwroot\assets\images\gallery\5.jpg" />
+    <Content Remove="wwwroot\assets\images\gallery\6.jpg" />
+    <Content Remove="wwwroot\assets\images\gallery\7.jpg" />
+    <Content Remove="wwwroot\assets\images\gallery\8.jpg" />
+    <Content Remove="wwwroot\assets\images\gallery\9.jpg" />
+    <Content Remove="wwwroot\assets\images\google.svg" />
+    <Content Remove="wwwroot\assets\images\interview.svg" />
+    <Content Remove="wwwroot\assets\images\lg\avatar1.jpg" />
+    <Content Remove="wwwroot\assets\images\lg\avatar10.jpg" />
+    <Content Remove="wwwroot\assets\images\lg\avatar11.jpg" />
+    <Content Remove="wwwroot\assets\images\lg\avatar12.jpg" />
+    <Content Remove="wwwroot\assets\images\lg\avatar2.jpg" />
+    <Content Remove="wwwroot\assets\images\lg\avatar3.jpg" />
+    <Content Remove="wwwroot\assets\images\lg\avatar4.jpg" />
+    <Content Remove="wwwroot\assets\images\lg\avatar5.jpg" />
+    <Content Remove="wwwroot\assets\images\lg\avatar6.jpg" />
+    <Content Remove="wwwroot\assets\images\lg\avatar7.jpg" />
+    <Content Remove="wwwroot\assets\images\lg\avatar8.jpg" />
+    <Content Remove="wwwroot\assets\images\lg\avatar9.jpg" />
+    <Content Remove="wwwroot\assets\images\login-img.svg" />
+    <Content Remove="wwwroot\assets\images\no-data.svg" />
+    <Content Remove="wwwroot\assets\images\not_found.svg" />
+    <Content Remove="wwwroot\assets\images\profile_av.png" />
+    <Content Remove="wwwroot\assets\images\task-view.svg" />
+    <Content Remove="wwwroot\assets\images\verify.svg" />
+    <Content Remove="wwwroot\assets\images\xs\avatar1.jpg" />
+    <Content Remove="wwwroot\assets\images\xs\avatar10.jpg" />
+    <Content Remove="wwwroot\assets\images\xs\avatar11.jpg" />
+    <Content Remove="wwwroot\assets\images\xs\avatar2.jpg" />
+    <Content Remove="wwwroot\assets\images\xs\avatar3.jpg" />
+    <Content Remove="wwwroot\assets\images\xs\avatar4.jpg" />
+    <Content Remove="wwwroot\assets\images\xs\avatar5.jpg" />
+    <Content Remove="wwwroot\assets\images\xs\avatar6.jpg" />
+    <Content Remove="wwwroot\assets\images\xs\avatar7.jpg" />
+    <Content Remove="wwwroot\assets\images\xs\avatar8.jpg" />
+    <Content Remove="wwwroot\assets\images\xs\avatar9.jpg" />
+    <Content Remove="wwwroot\assets\plugin\datatables\dataTables.bootstrap5.min.css" />
+    <Content Remove="wwwroot\assets\plugin\datatables\responsive.dataTables.min.css" />
+    <Content Remove="wwwroot\assets\plugin\fullcalendar\main.min.css" />
+    <Content Remove="wwwroot\assets\plugin\fullcalendar\main.min.js" />
+    <Content Remove="wwwroot\assets\plugin\nestable\jquery-nestable.css" />
+    <Content Remove="wwwroot\assets\plugin\prism\prism.css" />
+    <Content Remove="wwwroot\assets\plugin\prism\prism.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Cronos" Version="0.7.1" />
+    <PackageReference Include="Hangfire.AspNetCore" Version="1.7.24" />
+    <PackageReference Include="Hangfire.Core" Version="1.7.24" />
+    <PackageReference Include="Hangfire.MemoryStorage" Version="1.7.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\assets\bundles\apexcharts.bundle.js" />
+    <None Include="wwwroot\assets\bundles\dataTables.bundle.js" />
+    <None Include="wwwroot\assets\bundles\libscripts.bundle.js" />
+    <None Include="wwwroot\assets\bundles\nestable.bundle.js" />
+    <None Include="wwwroot\assets\css\my-task.style.min.css" />
+    <None Include="wwwroot\assets\fonts\icofont\fonts\icofont-.eot" />
+    <None Include="wwwroot\assets\fonts\icofont\fonts\icofont.eot" />
+    <None Include="wwwroot\assets\fonts\icofont\fonts\icofont.svg" />
+    <None Include="wwwroot\assets\fonts\icofont\fonts\icofont.ttf" />
+    <None Include="wwwroot\assets\fonts\icofont\fonts\icofont.woff" />
+    <None Include="wwwroot\assets\images\change-log.svg" />
+    <None Include="wwwroot\assets\images\document\menu-close.png" />
+    <None Include="wwwroot\assets\images\document\menu-open.png" />
+    <None Include="wwwroot\assets\images\forgot-password.svg" />
+    <None Include="wwwroot\assets\images\gallery\1.jpg" />
+    <None Include="wwwroot\assets\images\gallery\10.jpg" />
+    <None Include="wwwroot\assets\images\gallery\2.jpg" />
+    <None Include="wwwroot\assets\images\gallery\3.jpg" />
+    <None Include="wwwroot\assets\images\gallery\4.jpg" />
+    <None Include="wwwroot\assets\images\gallery\5.jpg" />
+    <None Include="wwwroot\assets\images\gallery\6.jpg" />
+    <None Include="wwwroot\assets\images\gallery\7.jpg" />
+    <None Include="wwwroot\assets\images\gallery\8.jpg" />
+    <None Include="wwwroot\assets\images\gallery\9.jpg" />
+    <None Include="wwwroot\assets\images\google.svg" />
+    <None Include="wwwroot\assets\images\interview.svg" />
+    <None Include="wwwroot\assets\images\lg\avatar1.jpg" />
+    <None Include="wwwroot\assets\images\lg\avatar10.jpg" />
+    <None Include="wwwroot\assets\images\lg\avatar11.jpg" />
+    <None Include="wwwroot\assets\images\lg\avatar12.jpg" />
+    <None Include="wwwroot\assets\images\lg\avatar2.jpg" />
+    <None Include="wwwroot\assets\images\lg\avatar3.jpg" />
+    <None Include="wwwroot\assets\images\lg\avatar4.jpg" />
+    <None Include="wwwroot\assets\images\lg\avatar5.jpg" />
+    <None Include="wwwroot\assets\images\lg\avatar6.jpg" />
+    <None Include="wwwroot\assets\images\lg\avatar7.jpg" />
+    <None Include="wwwroot\assets\images\lg\avatar8.jpg" />
+    <None Include="wwwroot\assets\images\lg\avatar9.jpg" />
+    <None Include="wwwroot\assets\images\login-img.svg" />
+    <None Include="wwwroot\assets\images\no-data.svg" />
+    <None Include="wwwroot\assets\images\not_found.svg" />
+    <None Include="wwwroot\assets\images\profile_av.png" />
+    <None Include="wwwroot\assets\images\task-view.svg" />
+    <None Include="wwwroot\assets\images\verify.svg" />
+    <None Include="wwwroot\assets\images\xs\avatar1.jpg" />
+    <None Include="wwwroot\assets\images\xs\avatar10.jpg" />
+    <None Include="wwwroot\assets\images\xs\avatar11.jpg" />
+    <None Include="wwwroot\assets\images\xs\avatar2.jpg" />
+    <None Include="wwwroot\assets\images\xs\avatar3.jpg" />
+    <None Include="wwwroot\assets\images\xs\avatar4.jpg" />
+    <None Include="wwwroot\assets\images\xs\avatar5.jpg" />
+    <None Include="wwwroot\assets\images\xs\avatar6.jpg" />
+    <None Include="wwwroot\assets\images\xs\avatar7.jpg" />
+    <None Include="wwwroot\assets\images\xs\avatar8.jpg" />
+    <None Include="wwwroot\assets\images\xs\avatar9.jpg" />
+    <None Include="wwwroot\assets\js\page\hr.js" />
+    <None Include="wwwroot\assets\js\page\index.js" />
+    <None Include="wwwroot\assets\js\page\task.js" />
+    <None Include="wwwroot\assets\js\template.js" />
+    <None Include="wwwroot\assets\plugin\datatables\dataTables.bootstrap5.min.css" />
+    <None Include="wwwroot\assets\plugin\datatables\responsive.dataTables.min.css" />
+    <None Include="wwwroot\assets\plugin\fullcalendar\main.min.css" />
+    <None Include="wwwroot\assets\plugin\fullcalendar\main.min.js" />
+    <None Include="wwwroot\assets\plugin\nestable\jquery-nestable.css" />
+    <None Include="wwwroot\assets\plugin\prism\prism.css" />
+    <None Include="wwwroot\assets\plugin\prism\prism.js" />
+  </ItemGroup>
+
+</Project>

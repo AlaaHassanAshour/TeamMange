@@ -1,0 +1,69 @@
+﻿@model CompanyInfromation
+@inject UserManager<IdentityUser> um
+@inject RoleManager<IdentityRole> rl
+@inject SignInManager<IdentityUser> sm
+<style>
+    .m-link{
+        font-weight:bold;
+    }
+</style>
+<div class="sidebar px-4 py-4 py-md-5 me-0">
+    <div class="d-flex flex-column h-100">
+        @if (Model != null)
+        {
+            <a class="mb-0 brand-icon">
+                <span class="logo-icon " style="margin-left:15px;">
+                    <img src="~/Images/@Model.image" class="img-fluid rounded-circle" width="60" height="60" />
+                </span>
+                <span class="logo-text"> @Model.CompanyName </span>
+            </a>
+        }
+
+        <!-- Menu: main ul -->
+
+        
+    <ul class="menu-list flex-grow-1 mt-3">
+        @if (User.IsInRole("Admin"))
+        {
+            <li><a class="m-link" asp-action="Index" asp-controller="Employee"><i class="icofont-users-alt-5"></i> <span>الرئيسية</span></a></li>
+            <li><a class="m-link" asp-action="AddEmployee" asp-controller="Employee"><i class="icofont-users-alt-5"></i> <span>الموظفين</span></a></li>
+            <li><a class="m-link" asp-action="AllEmployeeHoliday" asp-controller="Employee"><i class="icofont-paint"></i> <span>اجازات الموظفين</span></a></li>
+            <li><a class="m-link" asp-action="AllEmployeeLeaves" asp-controller="Employee"><i class="icofont-paint"></i> <span>الأذونات</span></a></li>
+            <li><a class="m-link" asp-action="Attendance" asp-controller="Employee"><i class="icofont-paint"></i> <span>الحضور</span></a></li>
+            <li class="collapsed">
+                <a class="m-link" data-bs-toggle="collapse" data-bs-target="#menu-Components" href="#">
+                    <i class="icofont-ui-calculator"></i> <span>الإعدادات</span> <span class="arrow icofont-dotted-down ms-auto text-end fs-5"></span>
+                </a>
+                <!-- Menu: Sub menu ul -->
+                <ul class="sub-menu collapse" id="menu-Components">
+                    <li><a class="ms-link" asp-controller="Setting" asp-action="AddSection"><span>إضافة أقسام</span> </a></li>
+                    <li><a class="ms-link" asp-controller="Setting" asp-action="AddJob"><span>إضافة وظائف</span> </a></li>
+                    <li><a class="ms-link" asp-action="AddHolidaySettings" asp-controller="Setting"><span>الاجازات</span> </a></li>
+                    <li><a class="ms-link" asp-controller="Setting" asp-action="AddGeneralSetting"><span>اعدادات عامة</span> </a></li>
+                </ul>
+            </li>
+        }
+        else if (User.IsInRole("Employee"))
+        {
+            <li><a class="m-link" asp-action="Index" asp-controller="WorkTime" asp-route-EID="@um.GetUserId(User)"><i class="icofont-users-alt-5"></i> <span>الرئيسية</span></a></li>
+            <li><a class="m-link" asp-action="LeaveReaquest" asp-controller="EmployeePages"><i class="icofont-paint"></i> <span>الأذونات</span></a></li>
+            <li><a class="m-link" asp-action="EmpHoliday" asp-controller="EmployeePages"><i class="icofont-paint"></i> <span>الاجازات</span></a></li>
+
+        }
+        @if (sm.IsSignedIn(User))
+        {
+            <li>
+                <form asp-controller="Account" asp-action="LogOut" method="post">
+                    <i class="icofont-contrast text-white"></i> <input value="تسجيل الخروج" class="font-weight-bold" type="submit" style="background-color: #484c7f;color: #fff; border: none;" />
+                </form>
+            </li>
+        }
+    </ul>
+
+        
+        <button type="button" class="btn btn-link sidebar-mini-btn text-light">
+            <span class="ms-2"><i class="icofont-bubble-right"></i></span>
+        </button>
+
+    </div>
+</div>

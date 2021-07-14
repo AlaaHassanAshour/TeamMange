@@ -1,0 +1,193 @@
+﻿@model WorkTimeVM
+<style>
+    #myProjectTable_length, #myProjectTable_filter {
+        display: none;
+    }
+</style>
+    <div id="mytask-layout" class="theme-indigo">
+
+        <partial name="MenuTab" model="@Model.CompanyInfromation" />
+
+        <!-- main body area -->
+        <div class="main px-lg-4 px-md-4">
+
+            <!-- Body: Body -->
+            <div class="body d-flex py-3">
+                <div class="container-xxl">
+                    <div class="row clearfix g-3">
+
+                        <div class="col-xl-4 col-lg-12 col-md-12">
+                            <div class="row g-3 row-deck">
+                                <div class="col-md-6 col-lg-6 col-xl-12">
+
+                                </div>
+                                <div class="col-md-6 col-lg-6 col-xl-12  flex-column">
+                                    @if (Model.WorkTime == null)
+                                    {
+                                        <a class="btn btn-dark p-3 me-1 mt-1 w-sm-100" asp-controller="WorkTime" asp-action="AdNewWork">
+                                            بدء العمل
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        @if (Model.WorkTime.States == 0 && !Model.WorkTime.HolidayOrNot)
+                                        {
+                                            <a class="btn btn-dark p-3 me-1 mt-1 w-sm-100" asp-controller="WorkTime" asp-action="AddWork" asp-route-WID="@Model.WorkTime.WorkTimeID">
+                                                بدء العمل
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            @if (Model.WorkTime.WorkEndDone != true)
+                                            {
+                                                <a onclick="return confirm('!!هل انت متاكد من الانهاء ؟؟')" class="btn btn-dark p-3 me-1 mt-1 w-sm-100" asp-controller="WorkTime" asp-action="DoneWork" asp-route-WID="@Model.WorkTime.WorkTimeID">
+                                                    إنهاء العمل
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                @if (Model.WorkTime.ExtraHours != true || Model.WorkTime.HolidayOrNot)
+                                                {
+                                                    <a class="btn btn-dark p-3 me-1 mt-1 w-sm-100" asp-controller="WorkTime" asp-action="AdditionalWork" asp-route-WID="@Model.WorkTime.WorkTimeID">
+                                                        ساعات إضافية
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <a onclick="return confirm('!!هل انت متاكد من الانهاء ؟؟')" class="btn btn-dark p-3 me-1 mt-1 w-sm-100"
+                                                       asp-controller="WorkTime" asp-action="AdditionalWorkDone" asp-route-WID="@Model.WorkTime.WorkTimeID">
+                                                        إنهاء الإضافي
+                                                    </a>
+                                                }
+
+                                            }
+
+                                        }
+                                    }
+
+
+
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row g-3 mb-3 row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-2 row-cols-xl-4 row-cols-xxl-4">
+                <div class="col">
+                    <div class="card bg-primary">
+                        <div class="card-body text-white d-flex align-items-center">
+                            <i class="icofont-data fs-3"></i>
+                            <div class="d-flex flex-column ms-3">
+                                <h6 class="mb-0">عدد أيام الدوام</h6>
+                                 <span class="text-white">@ViewBag.totalWork</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card bg-primary">
+                        <div class="card-body text-white d-flex align-items-center">
+                            <i class="icofont-chart-flow fs-3"></i>
+                            <div class="d-flex flex-column ms-3">
+                                <h6 class="mb-0">أيام الاجازات + أيام الغياب</h6>
+                                <span class="text-white">@ViewBag.totalHoliday</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card bg-primary">
+                        <div class="card-body text-white d-flex align-items-center">
+                            <i class="icofont-chart-flow-2 fs-3"></i>
+                            <div class="d-flex flex-column ms-3">
+                                <h6 class="mb-0">ساعات الخروج</h6>
+                                <span class="text-white">@ViewBag.totalExit</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card bg-primary">
+                        <div class="card-body text-white d-flex align-items-center">
+                            <i class="icofont-tasks fs-3"></i>
+                            <div class="d-flex flex-column ms-3">
+                                <h6 class="mb-0">الساعات الاضافية</h6>
+                                <span class="text-white">@ViewBag.totalAdd</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-3 mb-3 row-deck">
+                <div class="col-md-12">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <table id="myProjectTable" class="table text-center table-hover align-middle mb-0" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th class="fw-bold ms-1">رقم </th>
+                                                <th class="fw-bold ms-1">تاريخ اليوم</th>
+                                                <th class="fw-bold ms-1">وقت بدأ العمل</th>
+                                                <th class="fw-bold ms-1">وقت انهاء العمل</th>
+                                                <th class="fw-bold ms-1"> الاذن</th>
+                                                <th class="fw-bold ms-1"> دوام العمل</th>
+                                                <th class="fw-bold ms-1"> ساعات اضافية</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.Employee.WorkTimes.Where(c=>c.TheDate.Month == DateTime.Today.Month))
+                                            {
+                                            <tr>
+                                                <td>
+                                                    <a class="fw-bold text-secondary">@item.WorkTimeID</a>
+                                                </td>
+                                                <td>
+                                                    @item.TheDate.ToShortDateString()
+                                                </td>
+                                                <td>
+                                                    @item.WorkStart.ToShortTimeString().Trim(new Char[] { 'A', 'P', 'M' })
+                                                </td>
+                                                <td>
+                                                    @item.WorkEnd.ToShortTimeString().Trim(new Char[] { 'A', 'P', 'M' })
+                                                </td>
+                                                 @if (item.ExiteID != null)
+                                                    {
+                                                         <td> @item.ExitePrmission.TotalHrs</td>
+                                                    }else {<td>0</td>}
+
+                                                
+                                                @if (item.States != 0) {  <td> <i class="icofont-check-circled text-success"></i></td>}
+                                                else {  <td> <i class="icofont-close-circled text-danger"></i></td>}
+
+                                                <td>
+                                                    @item.ExtraHourDifference
+                                                </td>
+
+
+                                            </tr>
+
+                                            }
+
+
+
+
+                                        </tbody>
+                                    </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+    
